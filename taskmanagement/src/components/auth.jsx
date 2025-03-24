@@ -1,36 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { auth, provider, signInWithPopup, signInWithRedirect, signOut } from "../firebase";
+import React, {  useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { auth, provider, signInWithPopup, signOut } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import {setUser , logout } from "../store/authSlice";
 
 const Auth = () => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        const userData = {
+          name: currentUser.displayName,
+          email: currentUser.email,
+          photo: currentUser.photoURL,
+        };
+        dispatch(setUser(userData));
+      }
     });
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   const handleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log("User signed in:", result.user);
+      const userData = {
+        name: result.user.displayName,
+        email: result.user.email,
+        photo: result.user.photoURL,
+      };
+      dispatch(setUser(userData));
     } catch (error) {
       console.error("Error signing in: ", error);
-      
-      // Handle popup blocked error
-      if (error.code === "auth/popup-blocked" || error.code === "auth/cancelled-popup-request") {
-        console.log("Popup blocked, trying redirect...");
-        await signInWithRedirect(auth, provider);
-      }
     }
   };
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      console.log("User signed out.");
+      dispatch(logout());
     } catch (error) {
       console.error("Error signing out: ", error);
     }
@@ -40,7 +49,8 @@ const Auth = () => {
     <div className="auth-container">
       {user ? (
         <div>
-          <p>Welcome, {user.displayName}</p>
+          <p>Welcome, {user.name}</p>
+          <img src={user.photo} alt="Profile" width="50" height="50" />
           <button onClick={handleSignOut}>Sign Out</button>
         </div>
       ) : (

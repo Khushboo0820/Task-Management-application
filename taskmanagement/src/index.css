@@ -56,8 +56,23 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
+/* button backgrounf goggle image */
+  background-image: url("./assets/search.png");
+  background-repeat: no-repeat;
+  background-size: 15px; /* Adjust size as needed */
+  background-position: left 20px center; /* Align image to left side */
   transition: border-color 0.25s;
-}
+/* Button width and height */
+  width: 250px;
+  height: 40px;
+   /* Center Text */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 15px; /* Space between text and image */
+   color: white; /* Ensure text is visible */
+ }
+
 button:hover {
   border-color: #646cff;
 }
