@@ -1,0 +1,95 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  padding-left: 30px;
+  color-scheme: light dark;
+  color: black;
+  background-color: #ffffff;
+
+   /* Background Image */
+  background-image: url("./assets/circles_bg.png");
+  background-repeat: no-repeat;
+  background-size: contain; /* or 'cover' depending on your need */
+  background-position: right; /* Moves the image to the right */
+  width: 1257px;
+  height: 814px;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color:purple;
+}
+p{
+  width:400px;
+}
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+/* 🌟 Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    background-size: 50%; /* Reduce image size on smaller screens */
+    background-position: right bottom;
+  }
+  
+  h1 {
+    font-size: 2em; /* Reduce font size */
+  }
+
+  p {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    background-size: 40%; /* Smaller size for mobile */
+    background-position: right bottom;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+}
